@@ -1,0 +1,12 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "clangd.path": "/home/santtos/.espressif/tools/esp-clang/esp-19.1.2_20250312/esp-clang/bin/clangd",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=**",
+    "--compile-commands-dir=/home/santtos/Projects/RTOS/16bit-rom-esp-dumper/motherboard-flash-dump/build"
+  ],
+  "idf.currentSetup": "/home/santtos/esp/esp-idf",
+  "idf.flashType": "JTAG",
+  "idf.port": "/dev/ttyUSB0"
+}
