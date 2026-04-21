@@ -3,11 +3,15 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include <stdint.h>
+#include "esp_task_wdt.h"
 
-#define DI_PIN 19
-#define DO_PIN 5
-#define CLK_PIN 18
-#define CS_PIN 22
+//  Defining ESP32 Pins
+#define DI_PIN 19 // Data In flash pin
+#define DO_PIN 5 // Data Out flash pin
+#define CLK_PIN 18 // Clock flash pin
+#define CS_PIN 22 // Chip Enable flash pin]
+
+#define CHUNK_SIZE 16
 
 gpio_config_t io_conf = {
     .pin_bit_mask = (1ULL << DI_PIN) | (1ULL << CLK_PIN) | (1ULL << CS_PIN),
@@ -82,17 +86,24 @@ static void read_flash_data(uint32_t addr, uint8_t *buff, uint8_t len)
 
 void vTaskCode(void *pvParameters)
 {
+    // Disables Watchdog to avoid noise during dump
+    esp_task_wdt_delete(NULL);
+
+    // Disables Chip Select
     gpio_set_level((gpio_num_t)CS_PIN, 1);
+    
+    // Initial delay to start serial monitor
     vTaskDelay(pdMS_TO_TICKS(2000));
 
+    // Flash size: 8 Mbit
     uint32_t flash_size = 1024 * 1024;
-    uint8_t chunk[16];
+    uint8_t chunk[CHUNK_SIZE];
 
-    for(uint32_t addr = 0; addr < flash_size; addr += 16)
+    for(uint32_t addr = 0; addr < flash_size; addr += CHUNK_SIZE)
     {   
-        read_flash_data(addr, chunk, 16);
+        read_flash_data(addr, chunk, CHUNK_SIZE);
 
-        printf("%06X: ", (unsigned int) addr);
+        printf("%06X: ", (unsigned int)addr);
         for(int i = 0; i < 16; i++)
         {
             printf("%02X ", chunk[i]);
@@ -106,7 +117,6 @@ void vTaskCode(void *pvParameters)
 
     gpio_set_level((gpio_num_t)CS_PIN, 0);
     
-    /*
     // JEDEC ID command
     SPI_transfer(0x9F);
 
@@ -117,10 +127,6 @@ void vTaskCode(void *pvParameters)
     gpio_set_level((gpio_num_t)CS_PIN, 1);
 
     printf("Fabricant ID: %02X, Type: %02X, Capacity: %02X\n", m_id, type, cap);
-    */
-
-    printf("Finished!\n");
-    vTaskDelete(NULL);
 }
 
 void app_main(void)
