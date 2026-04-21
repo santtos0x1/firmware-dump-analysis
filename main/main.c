@@ -29,6 +29,27 @@ gpio_config_t do_io_conf = {
     .intr_type = GPIO_INTR_DISABLE
 };
 
+static void manufacturer_info(uint8_t cmd)
+{
+    gpio_set_level((gpio_num_t)CS_PIN, 0);
+    
+    // JEDEC ID command
+    SPI_transfer(cmd);
+
+    // Manufacturer ID
+    uint8_t m_id = SPI_transfer(0x00);
+    
+    // Type
+    uint8_t type = SPI_transfer(0x00);
+    
+    // Capacity
+    uint8_t cap = SPI_transfer(0x00);
+    
+    gpio_set_level((gpio_num_t)CS_PIN, 1);
+
+    printf("Manufacturer ID: %02X, Type: %02X, Capacity: %02X\n", m_id, type, cap);
+}
+
 static uint8_t SPI_transfer(uint8_t data)
 {
     uint8_t received_data = 0;
@@ -115,18 +136,8 @@ void vTaskCode(void *pvParameters)
         }
     }
 
-    gpio_set_level((gpio_num_t)CS_PIN, 0);
-    
-    // JEDEC ID command
-    SPI_transfer(0x9F);
-
-    uint8_t m_id = SPI_transfer(0x00);
-    uint8_t type = SPI_transfer(0x00);
-    uint8_t cap = SPI_transfer(0x00);
-    
-    gpio_set_level((gpio_num_t)CS_PIN, 1);
-
-    printf("Fabricant ID: %02X, Type: %02X, Capacity: %02X\n", m_id, type, cap);
+    // Shows manufacturer information
+    manufacturer_info(0x9F);
 }
 
 void app_main(void)
