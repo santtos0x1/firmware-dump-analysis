@@ -66,7 +66,7 @@ Our analysis of the raw dump revealed several critical artifacts:
 
 ## 🚀 Future Roadmap
 
-- [ ] Implement **automated Python scripts** to find more patterns.
+- [ ] Analyze firmware data regions and micro codes.
 
 ---
 
