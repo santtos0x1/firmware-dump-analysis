@@ -1,91 +1,74 @@
-# Firmware Dump Analysis
+# SPI-Sentinel: Motherboard Firmware Extraction & Analysis
 
 ![Platform](https://img.shields.io/badge/platform-ESP32-blue)
-![Language](https://img.shields.io/badge/language-C-orange)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Framework](https://img.shields.io/badge/framework-ESP--IDF-red)
+![Security](https://img.shields.io/badge/focus-Reverse%20Engineering-lightgrey)
 
 ---
 
-## 📌 Overview
+## 📌 Project Overview
 
 This project focuses on extracting and analyzing SPI flash memory from a motherboard using an ESP32-based reader.
 
 The goal is to obtain raw firmware data, study its internal structure, and identify patterns such as headers, repeating regions, and possible firmware components. The project combines low-level hardware interfacing with data analysis techniques to better understand how embedded systems store and organize information.
 
----
-
-## 📖 Background
-
-Modern motherboards store firmware inside SPI flash chips. These chips contain critical data such as bootloaders, configuration tables, and system firmware.
-
-Understanding how this data is structured provides insight into how systems initialize, operate, and manage hardware at a low level.
+![Hardware Setup](docs/images/protoboard.jpeg)
+*Figure 1: ESP32 Hardware interface for Out-of-Band SPI extraction.*
 
 ---
 
-## 📊 Goals
+## 🧠 Technical Deep Dive
 
-- Extract raw data from a motherboard SPI flash chip  
-- Analyze firmware structure and organization  
-- Identify repeating patterns and possible partitions  
-- Explore potential firmware components and layouts  
+### Hardware Interfacing
 
----
+The system utilizes the **ESP-IDF SPI Master driver** to communicate with Flash chips. We obtain an unaltered bit-for-bit image of the firmware.
 
-## ⚙️ Features
+### Structural Discovery
 
-- SPI flash dumping using ESP32  
-- Raw binary extraction  
-- Data inspection and pattern analysis  
-- Custom scripts for processing firmware data  
+Our analysis of the raw dump revealed several critical artifacts:
+
+* **Legacy Headers:** Detected `AMIBIOS`, `AMIJPG`, and `AMIBOOT` signatures, identifying the vendor as American Megatrends.
+* **Executable Recovery:** Identified and extracted a valid **PE (Portable Executable)** file embedded within the ROM.
+* **Signature Logic:** Discovered heuristic code that scans for the `AMIBIOS` signature and implements a 2048-bit (256-byte) pointer decrement upon a match, likely used for memory alignment.
 
 ---
 
-## 🧠 How it Works
+## 📊 Analysis Pipeline
 
-The ESP32 interfaces directly with the SPI flash chip, sending read commands and capturing the returned data.
+1. **Extraction:** ESP32 dumps SPI Flash via bit-banging or hardware SPI.
+2. **Ingestion:** Binary data is processed through ImHex.
+3. **Deconstruction:** identification of `MZ` (DOS) and `PE` (Windows/UEFI) headers.
+4. **Reverse Engineering:** Code analysis using **Cutter** to map initialization vectors and jump tables.
 
-The extracted binary is then analyzed to identify structural characteristics such as:
-
-- Repeating data blocks  
-- Potential headers or signatures  
-- Regions that may correspond to firmware sections  
-
----
-
-## 🛠️ Technologies
-
-- ESP32 (SPI communication)
-- C (ESP-IDF)
+![Heuristic Pattern Discovery](docs/images/directory_find_hex.jpg)
+*Figure 2: Identifying memory offsets and signature patterns in ImHex.*
 
 ---
 
-## 🔄 Pipeline
+## 🛠️ Tech Stack
 
-1. Connect ESP32 to SPI flash chip  
-2. Dump raw flash memory  
-3. Save data as binary file  
-4. Analyze structure and patterns  
-5. Identify possible firmware regions  
-
----
-
-## 📈 Analysis
-
+* **Firmware:** C (ESP-IDF) for high-performance SPI throughput.
+* **Analysis Tools:**
+    * **ImHex:** For hexadecimal structural visualization and pattern tagging.
+    * **Cutter/Rizin:** For x86 (16/32-bit) disassembly and decompilation.
 
 ---
 
-## 🔍 Results
+## 🔍 Key Findings
 
-
-
----
-
-## ⚠️ Notes
-
-This project is intended for educational and reverse engineering purposes only.
+> [!IMPORTANT]
+> **Signature-Based Navigation:** The firmware contains a specific routine that validates the `AMIBIOS` string. If found, the system performs a memory-offset adjustment (decrementing 2048 bits). This suggests the firmware uses a fixed-offset look-up table based on signature discovery rather than a standard file system.
 
 ---
 
-## 📎 License
+## 🚀 Future Roadmap
 
-MIT License
+- [ ] Implement **automated Python scripts** to find more patterns.
+
+---
+
+## ⚠️ Disclaimer
+
+This project is strictly for educational purposes and security research. Unauthorized access to hardware or firmware may void warranties or violate terms of service.
+
+---

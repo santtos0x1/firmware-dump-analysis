@@ -11,11 +11,13 @@
 - **Type:** Debug / Build Artifact  
 
 **Analysis:**
+
 - Strong indicator of **Intel Memory Reference Code (MRC)**
 - `.pdb` path suggests presence of **debug symbol references**
 - Implies firmware was compiled with traceable build environment paths
 
 **Implications:**
+
 - Confirms presence of **memory initialization routines**
 - Valuable for understanding early boot memory setup
 
@@ -28,10 +30,12 @@
 - **ASCII:** `"GTXR"`  
 
 **Analysis:**
+
 - Likely a **custom block signature or header**
 - Followed by structured binary data (non-text)
 
 **Hypothesis:**
+
 - Marks the **beginning of a structured region**
 
 ---
@@ -43,11 +47,13 @@
 - **Type:** Vendor / Firmware Identification  
 
 **Analysis:**
+
 - Confirms **ECS (Elitegroup)** motherboard firmware
 - References **BIOS lock functionality**
 - Includes **platform identifier (G41 chipset)**
 
 **Implication:**
+
 - Strong confirmation of firmware origin and platform
 
 ---
@@ -59,6 +65,7 @@
 - **Date:** `2010-05-14`  
 
 **Analysis:**
+
 - Identifies **exact motherboard model**
 - Matches G41-era hardware
 
@@ -69,10 +76,12 @@
 - **Raw:** `POSITIABACAXISWINDOWS`
 
 **Analysis:**
+
 - Likely **misaligned or concatenated strings**
 - Contains recognizable substring: `"WINDOWS"`
 
 **Hypothesis:**
+
 - Part of a **string table or metadata region**
 - Affected by alignment or extraction boundaries
 
@@ -84,6 +93,7 @@
 - **Type:** Firmware Identifier  
 
 **Analysis:**
+
 - Confirms use of **AMI BIOS**
 - Indicates **legacy BIOS (non-UEFI)**
 - Contains internal **build/version code**
@@ -96,6 +106,7 @@
 - **Type:** Firmware Structure Marker  
 
 **Analysis:**
+
 - Likely marks an **Extended BIOS Block**
 - Suggests **modular firmware architecture**
 
@@ -111,6 +122,7 @@
   - Sections: `.text`, `.data`
 
 **Analysis:**
+
 - Indicates firmware contains **executable modules**
 - Likely BIOS utilities or initialization routines
 
@@ -121,6 +133,7 @@
 - **Raw:** `IHATHC IDC-R7703`
 
 **Analysis:**
+
 - `"IDC-R7703"` follows **internal identifier pattern**
 - Likely **board/module code**
 - String appears **misaligned or partially reversed**
@@ -132,11 +145,13 @@
 - **Raw:** `iPnoee rDCR-MOA ATIP`
 
 **Analysis:**
+
 - `"ATIP"` relates to **optical media metadata**
 - `"RCD-MOA"` resembles internal identifier format
 - Likely **fragmented or misaligned string**
 
 **Implication:**
+
 - Suggests presence of **optical/media-related firmware components**
 
 ---
@@ -146,11 +161,13 @@
 - **Raw:** `$$CT\x02BootBlock SIO Table`
 
 **Analysis:**
+
 - Refers to **BootBlock region**
 - Likely contains **Super I/O configuration data**
 - Used during **early hardware initialization**
 
 **Notes:**
+
 - `$$CT` may act as **marker or delimiter**
 - Critical for **low-level system bring-up**
 
@@ -162,6 +179,7 @@
 - **Interpretation:** June 17, 2010  
 
 **Analysis:**
+
 - Likely **firmware build/release date**
 - Consistent with **G41-era systems**
 
