@@ -59,6 +59,9 @@ Our analysis of the raw dump revealed several critical artifacts:
 > [!IMPORTANT]
 > **Signature-Based Navigation:** The firmware contains a specific routine that validates the `AMIBIOS` string. If found, the system performs a memory-offset adjustment (decrementing 2048 bits). This suggests the firmware uses a fixed-offset look-up table based on signature discovery rather than a standard file system.
 
+![Signature check](/docs/images/check_signature.jpg)
+*Figure 3: Signature check code in Cutter.*
+
 ---
 
 ## 🚀 Future Roadmap
