@@ -100,18 +100,6 @@
 
 ---
 
-### 🧱 AMI Extended BIOS Block
-
-- **String:** `AMIEBBLK`  
-- **Type:** Firmware Structure Marker  
-
-**Analysis:**
-
-- Likely marks an **Extended BIOS Block**
-- Suggests **modular firmware architecture**
-
----
-
 ### 🧠 AMI Block with Embedded PE
 
 - **Header:** `AMIEBBLK`  
