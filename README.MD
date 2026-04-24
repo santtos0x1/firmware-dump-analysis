@@ -1,4 +1,11 @@
-# Motherboard Firmware Extraction & Analysis
+# AMIcore
+
+```txt
+   db    8b    d8 88  dP""b8  dP"Yb  88""Yb 888888 
+  dPYb   88b  d88 88 dP   `" dP   Yb 88__dP 88__   
+ dP__Yb  88YbdP88 88 Yb      Yb   dP 88"Yb  88""   
+dP""""Yb 88 YY 88 88  YboodP  YbodP  88  Yb 888888 
+```
 
 ![Platform](https://img.shields.io/badge/platform-ESP32-blue)
 ![Framework](https://img.shields.io/badge/framework-ESP--IDF-red)
