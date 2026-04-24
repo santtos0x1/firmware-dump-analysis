@@ -8,7 +8,7 @@
 **Device type**: Motherboard
 **Date**: 2010-05-14
 
-![Motherboard image](/docs/images/g41t-r3.jpg)
+<img src="/docs/images/g41t-r3.jpg" alt="Motherboard G41T-R3" width="800" height="600" style="max-width: 100%; height: auto;">
 *Figure 1: G41T-R3 Motherboard illustration.*
 
 ## 🔌 2. Memory Chip (BIOS / Flash)
