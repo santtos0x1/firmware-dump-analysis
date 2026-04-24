@@ -6,9 +6,9 @@
 
 **Model**: G41T-R3
 
-**Revision**: (V1.0A)
+**Revision**: V1.0A
 
-**Device type**: Motherboard
+**Device type**: LGA775 Motherboard
 
 **Date**: 2010-05-14
 
