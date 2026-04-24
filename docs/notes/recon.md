@@ -48,7 +48,7 @@
 
 **Dump verified**: Yes
 
-**Hash**: MD5-86ac36b8614648753867f2a507d4200a
+**Hash**: `MD5-86ac36b8614648753867f2a507d4200a`
 
 ## 🔍 5. Initial Observations
 
@@ -57,13 +57,14 @@
 **Detected patterns**: LZMA
 
 *Relevant strings*:
-    -`D:\Project\G41T\MRC\mrc_091106\5331\OUT32\MEMINIT.pdb`
-    -`POSITIABACAXISWINDOWS`
-    -`AMIBIOSC0800Z`
-    -`AMIEBBLK`
-    -`iPnoee rDCR-MOA ATIP`
-    -`$$CT\x02BootBlock SIO Table`
-    -`IHATHC IDC-R7703`
+
+-`D:\Project\G41T\MRC\mrc_091106\5331\OUT32\MEMINIT.pdb`
+-`POSITIABACAXISWINDOWS`
+-`AMIBIOSC0800Z`
+-`AMIEBBLK`
+-`iPnoee rDCR-MOA ATIP`
+-`$$CT\x02BootBlock SIO Table`
+-`IHATHC IDC-R7703`
 
 
 ## 🧩 6. Initial Structure (raw view)
@@ -72,14 +73,16 @@
 
 **Possible areas identified**: MRC, BootBlock register table Header and code
 
-bootloader:
+**bootloader**: Reset vector located at `0x0FFFF0`, which redirects execution to BIOS initialization code
 
-**code**: Intel x86 or x64 microcode
-
-config:
-
-padding:
+**code**: Intel x86 real-mode and possibly 32-bit protected-mode BIOS code
 
 Offsets of interesting regions:
 
+- `0x22C0 - 0xE93D0` - MRC
+- `0xFFFE0 - 0xFFFF0`
+- `0xF64C0 - 0xF7F90` - Suspected filesystem-related routines/real-mode x86
+
 ## 🧠 7. Initial Hypotheses
+
+- The dumped firmware appears to be a valid legacy BIOS image containing structured x86 real-mode code and identifiable data regions. Based on similarities with official BIOS versions, it may be possible to map, compare, and partially reconstruct this version.
