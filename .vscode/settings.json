@@ -8,5 +8,12 @@
   ],
   "idf.currentSetup": "/home/santtos/esp/esp-idf",
   "idf.flashType": "JTAG",
-  "idf.port": "/dev/ttyUSB0"
+  "idf.port": "/dev/ttyUSB0",
+  "cSpell.words": [
+    "binwalk",
+    "datasheet",
+    "ghidra",
+    "LZMA",
+    "Microcontroller"
+  ]
 }

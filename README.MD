@@ -1,4 +1,4 @@
-# SPI-Sentinel: Motherboard Firmware Extraction & Analysis
+# Motherboard Firmware Extraction & Analysis
 
 ![Platform](https://img.shields.io/badge/platform-ESP32-blue)
 ![Framework](https://img.shields.io/badge/framework-ESP--IDF-red)
