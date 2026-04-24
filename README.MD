@@ -67,6 +67,7 @@ Our analysis of the raw dump revealed several critical artifacts:
 ## 🚀 Future Roadmap
 
 - [ ] Analyze firmware data regions and micro codes.
+- [ ] Emulate dumped bios and official bios to compare.
 
 ---
 
