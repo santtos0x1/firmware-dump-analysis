@@ -1,0 +1,21 @@
+# BIOS (your dump)
+romimage: file=data/raw/dump/bios_17-06-2010.bin, address=0xfff00000
+
+# VGA BIOS (important for display)
+vgaromimage: file=/usr/share/bochs/VGABIOS-lgpl-latest.bin
+
+# RAM
+megs: 32
+
+# Display
+display_library: x
+
+# Boot only from ROM
+boot: disk
+
+# Logging
+log: bochslog.txt
+panic: action=ask
+error: action=report
+info: action=report
+debug: action=report

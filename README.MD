@@ -42,10 +42,11 @@ Our analysis of the raw dump revealed several critical artifacts:
 
 ## 📊 Analysis Pipeline
 
-1. **Extraction:** ESP32 dumps SPI Flash via bit-banging or hardware SPI.
-2. **Ingestion:** Binary data is processed through ImHex.
-3. **Deconstruction:** identification of `MZ` (DOS) and `PE` (Windows/UEFI) headers.
-4. **Reverse Engineering:** Code analysis using **Cutter** to map initialization vectors and jump tables.
+1. **Phase 0 - Extraction:** ESP32 dumps SPI Flash via bit-banging or hardware SPI.
+2. **Phase 1 - Processing:** Binary data is processed with tools: ImHex, Binwalk, xxd, dd.
+3. **Phase 2 - Analyzing:** Data is divided by regions and analyzed with Binwalk, vbindiff, ImHex, strings, dd.
+4. **Phase 3 - Emulation:** Bios is emulated with Bochs and log file is compared with official version
+5. **Phase 3 - Reverse Engineering:** Code analysis using **Cutter** to map initialization vectors and jump tables.
 
 ![Heuristic Pattern Discovery](docs/images/directory_find_hex.jpg)
 *Figure 2: Identifying memory offsets and signature patterns in ImHex.*
@@ -56,8 +57,14 @@ Our analysis of the raw dump revealed several critical artifacts:
 
 * **Firmware:** C (ESP-IDF) for high-performance SPI throughput.
 * **Analysis Tools:**
-    * **ImHex:** For hexadecimal structural visualization and pattern tagging.
-    * **Cutter/Rizin:** For x86 (16/32-bit) disassembly and decompilation.
+  * **ImHex:** For hexadecimal structural visualization and pattern tagging.
+  * **Cutter/Ghidra:** For x86 (16/32-bit) disassembly and decompilation.
+  * **strings:** For extracting human-readable strings and identifying embedded metadata, version info and debug paths.
+  * **dd:** For binary slicing — extracting specific regions by offset and size for isolated analysis.
+  * **binwalk:** For entropy analysis, signature scanning and recursive extraction of embedded modules.
+  * **xxd:** For raw hexadecimal inspection and manual byte-level analysis.
+  * **vbindiff:** For visual side-by-side binary comparison between the dumped and official firmware.
+  * **Bochs:** For x86 BIOS emulation, allowing behavioral comparison between firmware versions without physical hardware.
 
 ---
 
@@ -71,10 +78,24 @@ Our analysis of the raw dump revealed several critical artifacts:
 
 ---
 
+> [!IMPORTANT]
+> **MRC Region Identified:** A Memory Reference Code (MRC) module was identified at offset `0xE93D0`, containing the DDR memory initialization routines for the Intel G41 chipset. The module includes timing tables, frequency configuration and a PDB debug path confirming its origin: `D:\Project\G41T\MRC\mrc_091106\5331\OUT32\MEMINIT.pdb` (compiled November 2009, build 5331).
+
+---
+
+> [!IMPORTANT]
+> **BootBlock Structure Identified:** The firmware contains two BootBlock instances — a primary and a secondary (newer version) — both signed with `AMIBOOT ROM` and `AMIBIOSC` headers. Each BootBlock includes the following embedded drivers:
+>
+> - **POST Code:** x86 real mode initialization routines, CPU MSR configuration and CMOS access
+> - **IDE/ATA Driver:** Identified by string `IHATHC IDC-R7703` and `0080 a`
+> - **CD-ROM Driver:** Identified by ISO 9660 signature `CD001`
+> - **USB Driver:** Identified by signatures `USBC` (Command Block) and `USBS` (Status Block)
+> - **Super I/O Table:** `$$CT BootBlock SIO Table` — hardware register initialization table for the Super I/O chip
+
 ## 🚀 Future Roadmap
 
-- [ ] Analyze firmware data regions and micro codes.
-- [ ] Emulate dumped bios and official bios to compare.
+-[ ] Analyze firmware data regions and microcodes.
+-[ ] Emulate dumped bios and official bios to compare.
 
 ---
 
