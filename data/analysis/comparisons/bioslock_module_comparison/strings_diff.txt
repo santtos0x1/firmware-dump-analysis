@@ -1,0 +1,18 @@
+1c1
+< 1.01
+---
+> 4.19
+429,435c429,433
+< ^k2I]
+< P]y>
+< Tr^r
+< a`FJv
+< _wEhtT
+< ;{#A
+< _bL2_2$BIOSLOCKFUNCTION ELITEGROUP                       POS-ECIG41BS            _O_
+---
+> 1\x' 
+> 8@h6
+> ]r3OE
+> S,1W}
+> _bL2_2$BIOSLOCKFUNCTION ELITEGROUP                                               _O_
