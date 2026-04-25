@@ -28,7 +28,7 @@
 
 ---
 
-## bioslock_module_comparison
+## bioslock_module
 
 **Address Region - `Dumped`**: 0x66530 - 0x6E5E0
 
@@ -50,7 +50,7 @@
 
 ---
 
-## bootblock_post_drivers_comparison
+## bootblock_post_drivers
 
 **Address Region - `Dumped`**: 0xF64C0 - 0xF8120
 
@@ -69,3 +69,25 @@
 **MD5 hash - `Official`**: `f80ee62ec66131695ddbc4c2576add4a`
 
 **Hex diff**: ![Link to diff file](/data/analysis/comparisons/bootblock_post_drivers_comparison/hex_diff.txt)
+
+---
+
+## region_0xE93D0
+
+**Address Region - `Dumped`**: 0xE93D0 - 0xEB680
+
+**Address Region - `Official`**: 0xE93D0 - 0xEB680
+
+**Size - `Dumped`**: 8896 bytes
+
+**Size - `Official`**: 8896 bytes
+
+**Strings - `Dumped`**: ![Link to strings](/data/analysis/comparisons/region_0xE93D0_comparison/dump_strings.txt)
+
+**Strings - `Official`**: ![Link to strings](/data/analysis/comparisons/region_0xE93D0_comparison/official_strings.txt)
+
+**MD5 hash - `Dumped`**: `eb4c1a8abbeeffc975a0261b06356ec5`
+
+**MD5 hash - `Official`**: `eb4c1a8abbeeffc975a0261b06356ec5`
+
+**Hex diff**: ![Link to diff file](/data/analysis/comparisons/region_0xE93D0_comparison/hex_diff.txt)
