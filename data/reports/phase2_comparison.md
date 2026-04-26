@@ -72,6 +72,28 @@
 
 ---
 
+## amibios_pe
+
+**Address Region - `Dumped`**: 0xE0000 - 0xE93B0
+
+**Address Region - `Official`**: 0xE0000 - 0xE93B0
+
+**Size - `Dumped`**: 37824 bytes
+
+**Size - `Official`**: 37824 bytes
+
+**Strings - `Dumped`**: ![Link to strings](/data/analysis/comparisons/amibios_pe_comparison/dump_strings.txt)
+
+**Strings - `Official`**: ![Link to strings](/data/analysis/comparisons/amibios_pe_comparison/official_strings.txt)
+
+**MD5 hash - `Dumped`**: `4e4265633315be68c81bf7477a742355`
+
+**MD5 hash - `Official`**: `d2072803d6d6d75fdfb08cdc1854ccdb`
+
+**Hex diff**: ![Link to diff file](/data/analysis/comparisons/amibios_pe_comparison/hex_diff.txt)
+
+---
+
 ## region_0xE93D0
 
 **Address Region - `Dumped`**: 0xE93D0 - 0xEB680
@@ -91,3 +113,25 @@
 **MD5 hash - `Official`**: `eb4c1a8abbeeffc975a0261b06356ec5`
 
 **Hex diff**: ![Link to diff file](/data/analysis/comparisons/region_0xE93D0_comparison/hex_diff.txt)
+
+---
+
+## bbs_header
+
+**Address Region - `Dumped`**: 0xFFF40 - 0xFFFF0
+
+**Address Region - `Official`**: 0xFFF40 - 0xFFFF0
+
+**Size - `Dumped`**: 192 bytes
+
+**Size - `Official`**: 192 bytes
+
+**Strings - `Dumped`**: ![Link to strings](/data/analysis/comparisons/bbs_header_comparison/dump_strings.txt)
+
+**Strings - `Official`**: ![Link to strings](/data/analysis/comparisons/bbs_header_comparison/official_strings.txt)
+
+**MD5 hash - `Dumped`**: `740cd5485c3f1c568918606fd0722298`
+
+**MD5 hash - `Official`**: `8612661bcb22acdc3e4fd136cd5f3c8c`
+
+**Hex diff**: ![Link to diff file](/data/analysis/comparisons/bbs_header_comparison/hex_diff.txt)

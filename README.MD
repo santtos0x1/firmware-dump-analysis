@@ -46,7 +46,7 @@ Our analysis of the raw dump revealed several critical artifacts:
 2. **Phase 1 - Processing:** Binary data is processed with tools: ImHex, Binwalk, xxd, dd.
 3. **Phase 2 - Analyzing:** Data is divided by regions and analyzed with Binwalk, vbindiff, ImHex, strings, dd.
 4. **Phase 3 - Emulation:** Bios is emulated with Bochs and log file is compared with official version
-5. **Phase 3 - Reverse Engineering:** Code analysis using **Cutter** to map initialization vectors and jump tables.
+5. **Phase 4 - Reverse Engineering:** Code analysis using **Cutter** to map initialization vectors and jump tables.
 
 ![Heuristic Pattern Discovery](docs/images/directory_find_hex.jpg)
 *Figure 2: Identifying memory offsets and signature patterns in ImHex.*
@@ -94,7 +94,7 @@ Our analysis of the raw dump revealed several critical artifacts:
 
 ## 🚀 Future Roadmap
 
--[ ] Analyze firmware data regions and microcodes.
+-[ ] Analyze firmware data regions and micro-codes.
 -[ ] Emulate dumped bios and official bios to compare.
 
 ---
