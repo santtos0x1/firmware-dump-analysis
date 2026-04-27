@@ -1,5 +1,5 @@
 # BIOS (your dump)
-romimage: file=/home/santtos/Projects/RTOS/motherboard-flash-dump/data/raw/official/bios_04-07-2010/100407S.ROM, address=0xfff00000
+romimage: file=/home/santtos/Projects/RTOS/motherboard-flash-dump/data/raw/dump/bios_17-06-2010.bin, address=0xfff00000
 
 # VGA BIOS (important for display)
 vgaromimage: file=/usr/share/bochs/VGABIOS-lgpl-latest.bin
